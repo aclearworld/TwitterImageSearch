@@ -2,7 +2,7 @@ import React from 'react';
 import ImageList from './containers/ImageList'
 import Search from "./containers/Search";
 import './App.css';
-import {HashRouter as Router, Link, Redirect, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Link, Redirect, Route, Switch} from "react-router-dom";
 import NavigateBefore from '@material-ui/icons/NavigateBefore'
 import NavigateNext from '@material-ui/icons/NavigateNext'
 import {withStyles} from '@material-ui/core/styles';
@@ -31,67 +31,34 @@ const styles = {
     },
 };
 
-
-// const Aa = () => <div>Aa</div>;
-
-
-const App = () => {
+const App = ({classes}) => {
     return (
         <Router>
-            <Route
-                render={({location}) => (
-                    <div>
-                        {/*<div className={classes.root}>*/}
-                        <Route exact path="/" render={() => <Redirect to="/search" />} />
-                        {console.log(location.pathname.split('/').filter(a => a)[0])}
-                        <ul className="nav">
-                            <NavLink to="/search">search</NavLink>
-                            <NavLink to="/viewer">viewer</NavLink>
-                        </ul>
+            <div className={classes.root}>
+                <AppBar position="static" className={classes.bar}>
+                    <Toolbar>
+                        <Link to="search" style={{textDecoration: 'none'}}>
+                            <Button variant="contained" color="secondary" className={classes.menuButton}>
+                                Search
+                                <NavigateBefore />
+                            </Button>
+                        </Link>
+                        <Link to="viewer" style={{textDecoration: 'none'}}>
+                            <Button variant="contained" color="secondary" className={classes.menuButton}>
+                                Viewer
+                                <NavigateNext />
+                            </Button>
+                        </Link>
+                        <Typography variant="h6" color="inherit" className={classes.grow}>
+                            Twitter画像検索
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
 
-                        {/*<AppBar position="static" className={classes.bar}>*/}
-                        {/*<Toolbar>*/}
-                        {/*<Link to="search" style={{textDecoration: 'none'}}>*/}
-                        {/*<Button variant="contained" color="secondary" className={classes.menuButton}>*/}
-                        {/*Search*/}
-                        {/*<NavigateBefore />*/}
-                        {/*</Button>*/}
-                        {/*</Link>*/}
-                        {/*<Link to="viewer" style={{textDecoration: 'none'}}>*/}
-                        {/*<Button variant="contained" color="secondary" className={classes.menuButton}>*/}
-                        {/*Viewer*/}
-                        {/*<NavigateNext />*/}
-                        {/*</Button>*/}
-                        {/*</Link>*/}
-                        {/*<Typography variant="h6" color="inherit" className={classes.grow}>*/}
-                        {/*Twitter画像検索*/}
-                        {/*</Typography>*/}
-                        {/*</Toolbar>*/}
-                        {/*</AppBar>*/}
-
-                        <div>
-                            <Transition
-                                config={{tension: 1, friction: 10}}
-                                keys={location.pathname}
-                                from={{transform: 'translateY(500px)', opacity: 0}}
-                                enter={{transform: 'translateY(0px)', opacity: 1}}
-                                leave={{transform: 'translateY(500px)', opacity: 0}}>
-                                {style => (
-                                    <Switch location={location}>
-                                        <Route path="/search" render={props => Search({...props, style})} />
-                                        <Route path="/viewer" render={props => ImageList({...props, style})} />
-                                        <Route render={() => <div>Not Found</div>} />
-                                    </Switch>
-                                )}
-                            </Transition>
-                        </div>
-
-                        {/*<Route exact path="/" component={Search} />*/}
-                        {/*<Route path="/search" component={Search} />*/}
-                        {/*<Route path="/viewer" component={ImageList} />*/}
-                    </div>
-                )}
-            />
+                <Route exact path="/" component={Search} />
+                <Route path="/search" component={Search} />
+                <Route path="/viewer" component={ImageList} />
+            </div>
         </Router>
     );
 };
@@ -102,6 +69,4 @@ const NavLink = props => (
     </li>
 );
 
-export default App;
-
-// export default withStyles(styles)(App);
+export default withStyles(styles)(App);
