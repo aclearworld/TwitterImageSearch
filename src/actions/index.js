@@ -1,5 +1,5 @@
 import {actionTypes} from "./actionTypes";
-import giphyApi from "../APIs/giphyAPI";
+import twitterAPI from "../APIs/twitterAPI";
 
 const startRequest = () => {
     return {
@@ -17,12 +17,19 @@ const receiveUrls = Urls => {
 export const getUrls = title => {
     return dispatch => {
         dispatch(startRequest());
-        giphyApi(title).then(res => {
-            const imageUrlList = res.data.data.map(item => item.images.downsized.url);
-            console.log(imageUrlList);
-            dispatch(receiveUrls(imageUrlList));
-        }).catch(err => {
-            console.warn(err)
-        });
+        twitterAPI(title)
+            .catch(err => {
+                console.log('caught error', err.stack)
+            })
+            .then(res => {
+                const urls = res.statuses.map(status => {
+                    // if (statuse.extended_entities && statuse.extended_entities.media[0]
+                    //     && statuse.extended_entities.media[0].media_url) {
+                    // }
+                    return status.extended_entities.media[0].media_url;
+                });
+                console.log(urls);
+                dispatch(receiveUrls(urls));
+            })
     };
 };
