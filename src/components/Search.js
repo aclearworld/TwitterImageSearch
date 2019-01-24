@@ -38,9 +38,9 @@ class Search extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        const {getUrls, history} = this.props;
+        const {getUrls} = this.props;
         getUrls(this.state.title);
-        history.push('/viewer');
+        // history.push('/viewer');
         this.setState({title: ''});
     };
 

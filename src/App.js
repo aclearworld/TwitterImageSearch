@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ImageList from './containers/ImageList'
 import Search from "./containers/Search";
 import './App.css';
@@ -31,42 +31,36 @@ const styles = {
     },
 };
 
-const App = ({classes}) => {
-    return (
-        <Router>
+class App extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        const {classes} = this.props;
+        return (
             <div className={classes.root}>
                 <AppBar position="static" className={classes.bar}>
                     <Toolbar>
-                        <Link to="search" style={{textDecoration: 'none'}}>
-                            <Button variant="contained" color="secondary" className={classes.menuButton}>
-                                Search
-                                <NavigateBefore />
-                            </Button>
-                        </Link>
-                        <Link to="viewer" style={{textDecoration: 'none'}}>
-                            <Button variant="contained" color="secondary" className={classes.menuButton}>
-                                Viewer
-                                <NavigateNext />
-                            </Button>
-                        </Link>
+                        <Button variant="contained" color="secondary" className={classes.menuButton}>
+                            Search
+                            <NavigateBefore />
+                        </Button>
+                        <Button variant="contained" color="secondary" className={classes.menuButton}>
+                            Viewer
+                            <NavigateNext />
+                        </Button>
                         <Typography variant="h6" color="inherit" className={classes.grow}>
                             Twitter画像検索
                         </Typography>
                     </Toolbar>
                 </AppBar>
 
-                <Route exact path="/" component={Search} />
-                <Route path="/search" component={Search} />
-                <Route path="/viewer" component={ImageList} />
+                <Search />
+                <ImageList />
             </div>
-        </Router>
-    );
-};
-
-const NavLink = props => (
-    <li className="navItem">
-        <Link {...props} style={{cursor: 'pointer', color: 'inherit'}} />
-    </li>
-);
+        );
+    };
+}
 
 export default withStyles(styles)(App);
