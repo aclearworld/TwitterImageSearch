@@ -1,9 +1,26 @@
 import React from 'react';
+import {withStyles} from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import SearchIcon from '@material-ui/icons/Search';
+import Button from '@material-ui/core/Button';
+
+const styles = theme => ({
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 200,
+    },
+    menuButton: {
+        marginLeft: -12,
+        marginRight: 20,
+        marginTop: 13,
+    },
+});
 
 /**
  * 検索用コンポーネント
  */
-export default class Search extends React.Component {
+class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -28,13 +45,27 @@ export default class Search extends React.Component {
     };
 
     render() {
-        const {buttonText} = this.props;
+        const {buttonText, classes} = this.props;
         return (<div>
-            <h2> find your gif </h2>
+            {/*<h2> find your gif </h2>*/}
             <form onSubmit={this.handleSubmit}>
-                <input type="search" value={this.state.title} onChange={this.handleChange} />
-                <input type="submit" value={buttonText} />
+                <TextField
+                    id="standard-name"
+                    label="検索ワード"
+                    className={classes.textField}
+                    margin="normal"
+                    value={this.state.title} onChange={this.handleChange}
+                />
+
+                {/*<input type="search" value={this.state.title} onChange={this.handleChange} />*/}
+                <Button onClick={this.handleSubmit} variant="contained" color="secondary"
+                        className={classes.menuButton}>
+                    {buttonText}
+                    <SearchIcon />
+                </Button>
             </form>
         </div>)
     }
 }
+
+export default withStyles(styles)(Search);
