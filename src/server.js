@@ -20,12 +20,6 @@ app.post('/api', (req, res) => {
     };
 
     const target = req.body.target;
-    // const T = new Twit({
-    //     consumer_key: 'MiYQjdSHxwmvYv8qhQfTIlZPE',
-    //     consumer_secret: 'xmfytdTFgfCHBoiJBf4aJNoszSnzO9uylTig7bZJwPQkT54Tcf',
-    //     access_token: '915518888367943680-j98KyGJbE2Bi3o8VoSJ8fTZKavBUiml',
-    //     access_token_secret: 'T6kBRh36Ahm7ZU54nJwxAx3FULWJO7nY8NJN2Y8QgJKnr'
-    // });
 
     const T = new Twit({
         consumer_key: process.env.CONSUMER_KEY,
@@ -33,7 +27,6 @@ app.post('/api', (req, res) => {
         access_token: process.env.ACCESS_TOKEN,
         access_token_secret: process.env.ACCESS_TOKEN_SECRET
     });
-
 
     T.get('search/tweets', {
         q: target + ' filter:images exclude:retweets min_faves:400',
