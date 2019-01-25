@@ -3,7 +3,7 @@ import ImageList from '../components/ImageList'
 
 const mapStateToProps = state => {
     return {
-        urlList: state.imageUrls
+        UrlSchemas: state.imageUrls
     };
 };
 

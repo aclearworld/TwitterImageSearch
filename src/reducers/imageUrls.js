@@ -5,7 +5,7 @@ const initialState = [];
 export const imageUrls = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.RECEIVE_URLS:
-            return action.payload.Urls;
+            return action.payload.UrlSchemas;
         default:
             return state;
     }

@@ -14,22 +14,22 @@ const styles = theme => ({
     },
     gridList: {},
     gridImg: {
-        width: 300,
-        height: 300,
-        objectFit: 'cover',
+        width: 800,
+        height: 400,
+        // objectFit: 'cover',
     }
 });
 
-const ImageList = ({urlList, classes}) => {
+const ImageList = ({UrlSchemas, classes}) => {
     return (
         <div className={classes.root}>
-            <GridList className={classes.gridList} cellHeight={160} cols={5}>
-                {urlList.map(url => (
-                    <GridListTile key={url} cols={1}>
-                        <img className={classes.gridImg} src={url} alt="" />
+            <GridList className={classes.gridList} cellHeight={400} cols={4}>
+                {UrlSchemas.map(urlSchema => (
+                    <GridListTile key={urlSchema.url} cols={1}>
+                        <img className={classes.gridImg} src={urlSchema.url} alt="" />
                         <GridListTileBar
-                            title={url}
-                            subtitle={url} />
+                            title={urlSchema.text}
+                            subtitle={urlSchema.url} />
                     </GridListTile>
                 ))}
             </GridList>
