@@ -5,6 +5,8 @@ const logger = require('morgan');
 const path = require('path');
 const Twit = require('twit');
 
+require('dotenv').config();
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(logger('dev'));
 app.use(express.json());
@@ -18,12 +20,20 @@ app.post('/api', (req, res) => {
     };
 
     const target = req.body.target;
+    // const T = new Twit({
+    //     consumer_key: 'MiYQjdSHxwmvYv8qhQfTIlZPE',
+    //     consumer_secret: 'xmfytdTFgfCHBoiJBf4aJNoszSnzO9uylTig7bZJwPQkT54Tcf',
+    //     access_token: '915518888367943680-j98KyGJbE2Bi3o8VoSJ8fTZKavBUiml',
+    //     access_token_secret: 'T6kBRh36Ahm7ZU54nJwxAx3FULWJO7nY8NJN2Y8QgJKnr'
+    // });
+
     const T = new Twit({
-        consumer_key: 'MiYQjdSHxwmvYv8qhQfTIlZPE',
-        consumer_secret: 'xmfytdTFgfCHBoiJBf4aJNoszSnzO9uylTig7bZJwPQkT54Tcf',
-        access_token: '915518888367943680-j98KyGJbE2Bi3o8VoSJ8fTZKavBUiml',
-        access_token_secret: 'T6kBRh36Ahm7ZU54nJwxAx3FULWJO7nY8NJN2Y8QgJKnr'
+        consumer_key: process.env.CONSUMER_KEY,
+        consumer_secret: process.env.CONSUMER_SECRET,
+        access_token: process.env.ACCESS_TOKEN,
+        access_token_secret: process.env.ACCESS_TOKEN_SECRET
     });
+
 
     T.get('search/tweets', {
         q: target + ' filter:images exclude:retweets min_faves:400',
