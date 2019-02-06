@@ -23,12 +23,22 @@ const styles = {
         flexGrow: 1,
     },
     bar: {
+        height: '10%',
+        width: '100%',
         backgroundColor: cyan100,
     },
     menuButton: {
         marginLeft: -12,
         marginRight: 20,
     },
+    mainContentBox: {
+        height: '90%',
+        width: '100%',
+    },
+    mainContent: {
+        height: '100%',
+        width: '100%',
+    }
 };
 
 class App extends Component {
@@ -44,11 +54,11 @@ class App extends Component {
                     <Toolbar>
                         <Button variant="contained" color="secondary" className={classes.menuButton}>
                             Search
-                            <NavigateBefore />
+                            {/*<NavigateBefore/>*/}
                         </Button>
                         <Button variant="contained" color="secondary" className={classes.menuButton}>
                             Viewer
-                            <NavigateNext />
+                            {/*<NavigateNext/>*/}
                         </Button>
                         <Typography variant="h6" color="inherit" className={classes.grow}>
                             Twitter画像検索
@@ -56,8 +66,10 @@ class App extends Component {
                     </Toolbar>
                 </AppBar>
 
-                <Search />
-                <ImageList />
+                <div className={classes.mainContentBox}>
+                    <Search className={classes.mainContent}/>
+                    <ImageList className={classes.mainContent}/>
+                </div>
             </div>
         );
     };

@@ -17,13 +17,28 @@ const receiveUrls = UrlSchemas => {
 export const getUrls = title => {
     return dispatch => {
         dispatch(startRequest());
-        twitterAPI(title)
-            .then(res => {
-                console.log(res);
-                dispatch(receiveUrls(res.data.payloads));
-            })
-            .catch(err => {
-                console.log('caught error', err.stack);
-            })
+        if (process.env.NODE_ENV === 'development') {
+            const mockResponse = [
+                {
+                    text: '画像1',
+                    url: 'https://pbs.twimg.com/media/DyFQ8-ZVAAEDyuj.jpg'
+                },
+                {
+                    text: '画像2',
+                    url: 'https://pbs.twimg.com/media/DyFEzCZUYAQFj1K.jpg'
+                },
+            ];
+
+            dispatch(receiveUrls(mockResponse));
+        } else {
+            twitterAPI(title)
+                .then(res => {
+                    console.log(res);
+                    dispatch(receiveUrls(res.data.payloads));
+                })
+                .catch(err => {
+                    console.log('caught error', err.stack);
+                })
+        }
     };
 };

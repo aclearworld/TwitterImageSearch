@@ -14,11 +14,29 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, '../build')));
 
 
+app.post('/mock', (req, res) => {
+    const resJson = {
+        payloads: [
+            {
+                text: '画像1',
+                url: 'https://pbs.twimg.com/media/DyFQ8-ZVAAEDyuj.jpg'
+            },
+            {
+                text: '画像2',
+                url: 'https://pbs.twimg.com/media/DyFEzCZUYAQFj1K.jpg'
+            },
+        ]
+    };
+    res.json(resJson);
+});
+
+
 app.post('/api', (req, res) => {
     const resJson = {
         payloads: []
     };
 
+    if (!req.body.target) return;
     const target = req.body.target;
 
     const T = new Twit({
@@ -50,6 +68,6 @@ app.post('/api', (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log('express is listen port 3000 .....')
+app.listen(2929, () => {
+    console.log('express is listen port 2929 .....')
 });
