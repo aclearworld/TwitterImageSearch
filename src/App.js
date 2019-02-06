@@ -49,28 +49,38 @@ class App extends Component {
     render() {
         const {classes} = this.props;
         return (
-            <div className={classes.root}>
-                <AppBar position="static" className={classes.bar}>
-                    <Toolbar>
-                        <Button variant="contained" color="secondary" className={classes.menuButton}>
-                            Search
-                            {/*<NavigateBefore/>*/}
-                        </Button>
-                        <Button variant="contained" color="secondary" className={classes.menuButton}>
-                            Viewer
-                            {/*<NavigateNext/>*/}
-                        </Button>
-                        <Typography variant="h6" color="inherit" className={classes.grow}>
-                            Twitter画像検索
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
+            <Router>
+                <div className={classes.root}>
+                    <AppBar position="static" className={classes.bar}>
+                        <Toolbar>
+                            <Link to="search" style={{textDecoration: 'none'}}>
+                                <Button variant="contained" color="secondary" className={classes.menuButton}>
+                                    Search
+                                    {/*<NavigateBefore/>*/}
+                                </Button>
+                            </Link>
+                            <Link to="viewer" style={{textDecoration: 'none'}}>
+                                <Button variant="contained" color="secondary" className={classes.menuButton}>
+                                    Viewer
+                                    {/*<NavigateNext/>*/}
+                                </Button>
+                            </Link>
+                            <Typography variant="h6" color="inherit" className={classes.grow}>
+                                Twitter画像検索
+                            </Typography>
+                        </Toolbar>
+                    </AppBar>
 
-                <div className={classes.mainContentBox}>
-                    <Search className={classes.mainContent}/>
-                    <ImageList className={classes.mainContent}/>
+                    <div className={classes.mainContentBox}>
+                        <Route exact path="/" component={Search}/>
+                        <Route path="/search" component={Search}/>
+                        <Route path="/viewer" component={ImageList}/>
+
+                        {/*<Search className={classes.mainContent}/>*/}
+                        {/*<ImageList className={classes.mainContent}/>*/}
+                    </div>
                 </div>
-            </div>
+            </Router>
         );
     };
 }
