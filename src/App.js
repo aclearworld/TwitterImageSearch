@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ImageList from './containers/ImageList'
 import Search from "./containers/Search";
 import './App.css';
-import {BrowserRouter as Router, Link, Redirect, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Link, withRouter, Redirect, Route, Switch} from "react-router-dom";
 import NavigateBefore from '@material-ui/icons/NavigateBefore'
 import NavigateNext from '@material-ui/icons/NavigateNext'
 import {withStyles} from '@material-ui/core/styles';
@@ -75,7 +75,6 @@ class App extends Component {
                         <Route exact path="/" component={Search}/>
                         <Route path="/search" component={Search}/>
                         <Route path="/viewer" component={ImageList}/>
-
                         {/*<Search className={classes.mainContent}/>*/}
                         {/*<ImageList className={classes.mainContent}/>*/}
                     </div>

@@ -1,0 +1,49 @@
+.imageRoot{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.AnimationRoot{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ff7b82;
+}
+
+.AnimationPage1{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ffa12d;
+}
+
+.AnimationPage2{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ff2814;
+    /*transform: translateX(100%);*/
+}
+
+.AnimationPage3{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ff349c;
+    /*transform: translateX(-100%)*/
+}
+.AnimationPage4{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #8646ff;
+    /*transform: translateX(100%)*/
+}
+.AnimationPage5{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #7cff44;
+    /*transform: translateX(-100%)*/
+}
